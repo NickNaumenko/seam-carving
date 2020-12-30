@@ -59,15 +59,18 @@ class SeamCarver {
 
     const seamIndexes = seam.map((val, i) => (val + width * i) * 4);
 
-    let idx = 0; let
-      removedPixel = 0;
-    for (let i = 0; i < newData.length; i++) {
-      if (i === seamIndexes[removedPixel]) {
-        i += 4;
-        removedPixel++;
+    let idx = 0;
+    let originIdx = 0;
+    for (let i = 0; i < seamIndexes.length; i++) {
+      while (originIdx < seamIndexes[i]) {
+        newData[idx++] = data[originIdx++];
       }
-      newData[idx++] = data[i];
+      originIdx += 4;
     }
+    while (originIdx < data.length) {
+      newData[idx++] = data[originIdx++];
+    }
+
     this.imageData = new ImageData(newData, (width - 1));
     return this.imageData;
   }
