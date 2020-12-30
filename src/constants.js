@@ -1,0 +1,16 @@
+export const loadingState = {
+  idle: 'IDLE',
+  loading: 'LOADING',
+  succeeded: 'SUCCEEDED',
+  failed: 'FAILED',
+};
+
+export const eventTypes = {
+  INIT: 'INIT',
+  RESIZE: 'RESIZE',
+  RESIZED_IMAGE: 'RESIZED_IMAGE',
+  FIND_SEAM_REQUEST: 'FIND_SEAM_REQUEST',
+  FIND_SEAM_SUCCESS: 'FIND_SEAM_SUCCESS',
+  REMOVE_SEAM_REQUEST: 'REMOVE_SEAM_REQUEST',
+  REMOVE_SEAM_SUCCESS: 'REMOVE_SEAM_SUCCESS',
+};

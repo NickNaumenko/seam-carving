@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         test: /\.worker\.js$/,
-        use: { loader: "worker-loader" },
+        use: { loader: 'worker-loader' },
       },
       {
         test: /\.m?js$/,
@@ -34,7 +34,7 @@ module.exports = {
             plugins: [
               '@babel/plugin-proposal-object-rest-spread',
               '@babel/plugin-transform-runtime',
-              '@babel/plugin-proposal-class-properties'
+              '@babel/plugin-proposal-class-properties',
             ],
           },
         },
