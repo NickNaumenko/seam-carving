@@ -12,6 +12,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html',
+      scriptLoading: 'defer',
     }),
   ],
   module: {
