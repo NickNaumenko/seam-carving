@@ -33,6 +33,14 @@
 
   <div class="workspace-screen" id="workspace-screen">
     <header class="header">
+      <ul class="header__menu">
+        <li class="header__menu-item">
+          <label class="header__button header__button--menu">
+            <input class="visually-hidden" type="file"  data-controls="upload-input" accept="image/*">
+            New file
+          </label>
+        </li>
+      </ul>
       <ul class="header__menu dimensions">
         <li class="dimensions__field">
           <label>width
@@ -71,15 +79,13 @@
         </section>
         <div class="divider">or</div>
         <div class="select-file">
-          <input type="file" id="upload-input" accept="image/*">
+          <input type="file" id="upload-input" data-controls="upload-input" accept="image/*">
         </div>
       </div>
       <div class="canvas-container">
         <canvas class="canvas" id="canvas" hidden></canvas>
       </div>
     </div>
-  </div>
-  <div id="root">
   </div>
 </body>
 

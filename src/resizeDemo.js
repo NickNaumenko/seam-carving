@@ -56,6 +56,10 @@ class ResizeDemo {
     const { imageData } = this.#picture;
     this.#imageCanvas.putImageData(imageData);
   }
+
+  terminate() {
+    this.#worker.terminate();
+  }
 }
 
 export default ResizeDemo;
