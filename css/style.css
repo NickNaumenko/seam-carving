@@ -131,6 +131,7 @@ body {
   list-style: none;
   display: flex;
   margin-right: 20px;
+  font-size: 0.9rem;
 }
 
 .header__button {
@@ -140,15 +141,18 @@ body {
   min-height: 20px;
   padding: 2px 5px;
   font: inherit;
-  font-size: 0.9rem;
   border: none;
   background-color: var(--primary-1);
   cursor: pointer;
 }
 
+.header__button--menu {
+  color: var(--white);
+  background-color: transparent;
+}
+
 .dimensions {
   display: flex;
-  font-size: 0.9rem;
 }
 
 .dimensions__field {

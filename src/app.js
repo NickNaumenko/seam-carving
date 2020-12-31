@@ -1,4 +1,3 @@
-/* eslint-disable no-new */
 import Header from './uiComponents/header';
 import UploadMenu from './uiComponents/uploadMenu';
 import ImageCanvas from './uiComponents/imageCanvas';
@@ -6,20 +5,66 @@ import ImageCanvas from './uiComponents/imageCanvas';
 import ResizeDemo from './resizeDemo';
 import Workspace from './uiComponents/workspace';
 import { useSubscribe } from './store/store';
+import loadImage from './helpers/loadImage';
 
-new Header();
-const uploadMenu = new UploadMenu();
+class App {
+  #workspace;
 
-const onImageLoad = (img) => {
-  uploadMenu.hide();
-  new Workspace();
-  const imageCanvas = new ImageCanvas(img);
+  #canvas;
 
-  const resizeDemo = new ResizeDemo(imageCanvas);
+  #header;
 
-  const resize = ({ width, height }) => resizeDemo.resize(width, height);
-  const subscribe = useSubscribe();
-  subscribe(resize);
-};
+  #uploadMenu;
 
-uploadMenu.onLoad(onImageLoad);
+  #resizeDemo;
+
+  #loaders = [];
+
+  constructor() {
+    this.#header = new Header();
+    this.#uploadMenu = new UploadMenu();
+
+    this.showWorkspace = this.showWorkspace.bind(this);
+    this.handleImageLoaded = this.handleImageLoaded.bind(this);
+  }
+
+  showWorkspace(img) {
+    this.#uploadMenu.hide();
+    this.#workspace = new Workspace();
+    this.#canvas = new ImageCanvas(img);
+    this.#resizeDemo = new ResizeDemo(this.#canvas);
+
+    const subscribe = useSubscribe();
+    const resize = ({ width, height }) => this.#resizeDemo.resize(width, height);
+    subscribe(resize);
+
+    this.#header.enable();
+  }
+
+  resetWorkspace() {
+    this.#workspace.destroy();
+    this.#canvas.destroy();
+    this.#header.disable();
+    this.#resizeDemo.terminate();
+  }
+
+  init() {
+    this.#loaders = [...document.querySelectorAll('input[data-controls="upload-input"]')];
+    this.#loaders.forEach((elem) => {
+      elem.addEventListener('change', this.handleImageLoaded);
+    });
+  }
+
+  async handleImageLoaded(e) {
+    if (!e.target.files.length) {
+      return;
+    }
+    if (this.#workspace) {
+      this.resetWorkspace();
+    }
+    const img = await loadImage(e.target.files[0]);
+    this.showWorkspace(img);
+  }
+}
+
+export default new App();

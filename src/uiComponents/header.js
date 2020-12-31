@@ -11,6 +11,8 @@ function Header() {
   const zoomOutButton = element.querySelector('.zoom__button--out');
   const zoom = element.querySelector('.zoom__count');
 
+  const controls = [widthInput, heightInput, zoomInButton, zoomOutButton];
+
   const subscribe = useSubscribe();
   const dispatch = useDispatch();
 
@@ -32,6 +34,19 @@ function Header() {
   heightInput.addEventListener('change', (e) => dispatch(setHeight(e.target.value)));
   zoomInButton.addEventListener('click', () => dispatch(zoomIn()));
   zoomOutButton.addEventListener('click', () => dispatch(zoomOut()));
+
+  return {
+    disable() {
+      controls.forEach((elem) => {
+        elem.disabled = true;
+      });
+    },
+    enable() {
+      controls.forEach((elem) => {
+        elem.disabled = false;
+      });
+    },
+  };
 }
 
 export default Header;
