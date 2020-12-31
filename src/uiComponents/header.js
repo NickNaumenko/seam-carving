@@ -35,18 +35,16 @@ function Header() {
   zoomInButton.addEventListener('click', () => dispatch(zoomIn()));
   zoomOutButton.addEventListener('click', () => dispatch(zoomOut()));
 
-  return {
-    disable() {
-      controls.forEach((elem) => {
-        elem.disabled = true;
-      });
-    },
-    enable() {
-      controls.forEach((elem) => {
-        elem.disabled = false;
-      });
-    },
-  };
+  const disable = () => controls.forEach((elem) => {
+    elem.disabled = true;
+  });
+  const enable = () => controls.forEach((elem) => {
+    elem.disabled = false;
+  });
+
+  disable();
+
+  return { disable, enable };
 }
 
 export default Header;
